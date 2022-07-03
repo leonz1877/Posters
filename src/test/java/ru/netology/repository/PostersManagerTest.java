@@ -18,7 +18,7 @@ public class PostersManagerTest {
     PostersMovie film10 = new PostersMovie(34, "Последняя дуэль", "история", 2021);
     PostersMovie film11 = new PostersMovie(45, "Земля кочевников", "драма", 2020);
     PostersMovie film12 = new PostersMovie(56, "Власть пса", "драма", 2021);
-    PostersMovie film13 = new PostersMovie(67, "Лига справедливости", "фантистика", 2021);
+    PostersMovie film13 = new PostersMovie(67, "Лига справедливости", "фантастика", 2021);
     PostersMovie film14 = new PostersMovie(78, "Аннет", "мюзикл", 2020);
 
     //Тестируем вывод всех значений
