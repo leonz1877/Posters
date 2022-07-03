@@ -2,8 +2,7 @@ package ru.netology.repository;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import ru.netology.domain.PostersMovie;
+import ru.netology.repository.PostersMovie;
 
 public class PostersManagerTest {
 
@@ -22,7 +21,8 @@ public class PostersManagerTest {
     PostersMovie film13 = new PostersMovie(67, "Лига справедливости", "фантистика", 2021);
     PostersMovie film14 = new PostersMovie(78, "Аннет", "мюзикл", 2020);
 
- @Test
+    //Тестируем вывод всех значений
+    @Test
     public void testFindAllAllValue() {
         PostersManager posters = new PostersManager();
         posters.save(film1);
@@ -101,6 +101,7 @@ public class PostersManagerTest {
 
         Assertions.assertArrayEquals(expected, actual);
     }
+
     @Test
     public void testFindAllOneValue() {
         PostersManager posters = new PostersManager();
@@ -266,6 +267,7 @@ public class PostersManagerTest {
         Assertions.assertArrayEquals(expected, actual);
     }
 
+    //тестируем вывод последих афиш со значением по умолчанию (10)
     @Test
     public void testDefaultLimit() {
         PostersManager posters = new PostersManager();
@@ -306,6 +308,7 @@ public class PostersManagerTest {
         Assertions.assertArrayEquals(expected, actual);
     }
 
+    // Тестрируем вывод последних афиш с определяемым значением
     @Test
     public void testSetLimitNull() {
         PostersManager posters = new PostersManager(0);
@@ -345,6 +348,7 @@ public class PostersManagerTest {
 
         Assertions.assertArrayEquals(expected, actual);
     }
+
     @Test
     public void testSetLimitOne() {
         PostersManager posters = new PostersManager(1);
@@ -465,4 +469,45 @@ public class PostersManagerTest {
         Assertions.assertArrayEquals(expected, actual);
     }
 
+    //Тестируем вывод афиш, когда их меньше, чем установленный лимит вывода
+    @Test
+    public void testSetLimit() {
+        PostersManager posters = new PostersManager(4);
+        //posters.save(film1);
+        //posters.save(film2);
+        //posters.save(film3);
+        posters.save(film4);
+        //posters.save(film5);
+        //posters.save(film6);
+        //posters.save(film7);
+        posters.save(film8);
+        //posters.save(film9);
+        //posters.save(film10);
+        //posters.save(film11);
+        //posters.save(film12);
+        //posters.save(film13);
+        //posters.save(film14);
+
+        PostersMovie[] expected = new PostersMovie[]{
+
+                //film14,
+                //film13,
+                //film12,
+                //film11,
+                //film10,
+                //film9,
+                film8,
+                //film7,
+                //film6,
+                //film5,
+                film4,
+                //film3,
+                //film2,
+                //film1
+        };
+
+        PostersMovie[] actual = posters.findLast();
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
 }

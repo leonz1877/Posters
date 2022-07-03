@@ -1,19 +1,19 @@
 package ru.netology.repository;
 
-import ru.netology.domain.PostersMovie;
-
 public class PostersManager {
-
+    //Поля
     private int limit = 10;
 
+    //Конструкторы
     public PostersManager(int limit) {
         this.limit = limit;
     }
 
-    public PostersManager () {
+    public PostersManager() {
         this.limit = limit;
     }
 
+    //Методы
     public int getLimit() {
         return limit;
     }
@@ -24,7 +24,7 @@ public class PostersManager {
 
     private PostersMovie[] films = new PostersMovie[0];
 
-    public void save(ru.netology.domain.PostersMovie film) {
+    public void save(ru.netology.repository.PostersMovie film) {
         PostersMovie[] temp = new PostersMovie[films.length + 1];
         for (int i = 0; i < films.length; i++) {
             temp[i] = films[i];
@@ -37,11 +37,19 @@ public class PostersManager {
         return films;
     }
 
-    public PostersMovie[] findLast(){
-        PostersMovie[] lastLimit = new PostersMovie [limit];
-        for (int i = 0; i < limit; i++) {
-            lastLimit[i] = films[films.length-1-i];
-        };
+    public PostersMovie[] findLast() {
+        // проверяем, если в репозитории фильмов менее чем установлено методом limit - выводим все что есть
+        int lastFilms;
+        if (films.length < limit) {
+            lastFilms = films.length;
+        } else {
+            lastFilms = limit;
+        }
+        PostersMovie[] lastLimit = new PostersMovie[lastFilms];
+        for (int i = 0; i < lastLimit.length; i++) {
+            lastLimit[i] = films[films.length - 1 - i];
+        }
+        ;
         return lastLimit;
     }
 }
